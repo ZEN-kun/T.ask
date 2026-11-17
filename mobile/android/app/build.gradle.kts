@@ -8,7 +8,23 @@ plugins {
 android {
     namespace = "com.task.app.task_mobile"
     compileSdk = flutter.compileSdkVersion
-    // ndkVersion is omitted to prevent unnecessary NDK downloads on ARM architectures
+    
+    val localProperties = java.util.Properties().apply {
+        val localPropertiesFile = rootProject.file("local.properties")
+        if (localPropertiesFile.exists()) {
+            load(localPropertiesFile.inputStream())
+        }
+    }
+    val sdkDirPath = localProperties.getProperty("sdk.dir")
+        ?: System.getenv("ANDROID_HOME")
+        ?: System.getenv("ANDROID_SDK_ROOT")
+
+    val installedNdks = if (sdkDirPath != null) file("$sdkDirPath/ndk").listFiles()?.filter { it.isDirectory } else null
+    if (!installedNdks.isNullOrEmpty()) {
+        ndkVersion = installedNdks.sortedByDescending { it.name }.first().name
+    } else {
+        ndkVersion = flutter.ndkVersion
+    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
