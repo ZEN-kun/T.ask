@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 620" width="100%" height="100%">
+  <defs>
+    <linearGradient id="waBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064E3B" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+    <linearGradient id="msgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <filter id="msgShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+    <marker id="waArrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#10B981" />
+    </marker>
+    <marker id="blueArrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#38BDF8" />
+    </marker>
+  </defs>
+
+  <rect width="1100" height="620" rx="16" fill="url(#waBg)" />
+
+  <!-- Header -->
+  <g transform="translate(60, 45)">
+    <text x="0" y="0" font-family="'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="800" fill="#FFFFFF">WhatsApp Bi-Directional Task Loop</text>
+    <text x="0" y="24" font-family="'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="500" fill="#6EE7B7">Zero-Friction Task Assignment &amp; 'DONE' Status Closure</text>
+  </g>
+
+  <!-- Lifeline Headers / Columns -->
+  <!-- Column 1: T.ask Backend -->
+  <g transform="translate(100, 100)">
+    <rect width="200" height="45" rx="8" fill="#1E293B" stroke="#3B82F6" stroke-width="1.5" />
+    <text x="100" y="28" font-family="'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#60A5FA" text-anchor="middle">⚡ T.ask Backend</text>
+    <line x1="100" y1="45" x2="100" y2="480" stroke="#334155" stroke-width="2" stroke-dasharray="6" />
+  </g>
+
+  <!-- Column 2: WhatsApp Cloud API -->
+  <g transform="translate(450, 100)">
+    <rect width="200" height="45" rx="8" fill="#1E293B" stroke="#10B981" stroke-width="1.5" />
+    <text x="100" y="28" font-family="'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#34D399" text-anchor="middle">💬 WhatsApp Cloud API</text>
+    <line x1="100" y1="45" x2="100" y2="480" stroke="#334155" stroke-width="2" stroke-dasharray="6" />
+  </g>
+
+  <!-- Column 3: Assigned Employee -->
+  <g transform="translate(800, 100)">
+    <rect width="200" height="45" rx="8" fill="#1E293B" stroke="#F59E0B" stroke-width="1.5" />
+    <text x="100" y="28" font-family="'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#FBBF24" text-anchor="middle">👤 Assigned Employee</text>
+    <line x1="100" y1="45" x2="100" y2="480" stroke="#334155" stroke-width="2" stroke-dasharray="6" />
+  </g>
+
+  <!-- Action 1: Task Extracted & Dispatched -->
+  <g transform="translate(0, 180)">
+    <line x1="200" y1="0" x2="550" y2="0" stroke="#38BDF8" stroke-width="2.5" marker-end="url(#blueArrow)" />
+    <text x="375" y="-10" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="600" fill="#93C5FD" text-anchor="middle">1. POST /messages (Task Assigned)</text>
+  </g>
+
+  <!-- Action 2: WhatsApp delivers to user -->
+  <g transform="translate(0, 220)">
+    <line x1="550" y1="0" x2="900" y2="0" stroke="#10B981" stroke-width="2.5" marker-end="url(#waArrow)" />
+    <text x="725" y="-10" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="600" fill="#6EE7B7" text-anchor="middle">2. Delivers Notification Card</text>
+  </g>
+
+  <!-- Visual: Mock Message Card -->
+  <g transform="translate(740, 240)" filter="url(#msgShadow)">
+    <rect width="240" height="110" rx="10" fill="#064E3B" stroke="#059669" stroke-width="1" />
+    <text x="15" y="22" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#6EE7B7">📋 T.ask — New Task #12</text>
+    <text x="15" y="42" font-family="'Segoe UI', sans-serif" font-size="11" fill="#FFFFFF">Task: Complete API testing</text>
+    <text x="15" y="60" font-family="'Segoe UI', sans-serif" font-size="11" fill="#FFFFFF">Due: Friday</text>
+    <rect x="15" y="74" width="210" height="24" rx="4" fill="#022C22" />
+    <text x="120" y="90" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="700" fill="#34D399" text-anchor="middle">To complete, reply: DONE 12</text>
+  </g>
+
+  <!-- Action 3: User replies DONE 12 -->
+  <g transform="translate(0, 390)">
+    <line x1="900" y1="0" x2="550" y2="0" stroke="#F59E0B" stroke-width="2.5" marker-end="url(#waArrow)" />
+    <text x="725" y="-10" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#FDE68A" text-anchor="middle">3. User replies: "DONE 12"</text>
+  </g>
+
+  <!-- Action 4: Webhook delivery to Backend -->
+  <g transform="translate(0, 440)">
+    <line x1="550" y1="0" x2="200" y2="0" stroke="#10B981" stroke-width="2.5" marker-end="url(#waArrow)" />
+    <text x="375" y="-10" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="600" fill="#6EE7B7" text-anchor="middle">4. Webhook Event: /api/webhooks/whatsapp</text>
+  </g>
+
+  <!-- Action 5: Backend Validation & DB update -->
+  <g transform="translate(100, 470)">
+    <rect width="200" height="50" rx="8" fill="#047857" stroke="#34D399" stroke-width="1.5" />
+    <text x="100" y="22" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">5. Validate Sender Phone</text>
+    <text x="100" y="38" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#A7F3D0" text-anchor="middle">✔ Task #12 = Completed</text>
+  </g>
+</svg>

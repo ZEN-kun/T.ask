@@ -1,0 +1,26 @@
+services:
+  # =========================================================================
+  # MODEL 1: SPEECH-TO-TEXT TRANSCRIPTION (Faster-Whisper ASR Engine)
+  # Pre-configured with OpenAI's Whisper model (downloads automatically on start)
+  # Provides a high-speed REST API on port 9000 with initial_prompt name biasing.
+  # =========================================================================
+  whisper-asr:
+    image: onerahmet/openai-whisper-asr-webservice:latest
+    container_name: task_whisper_service
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+    environment:
+      # Options for ASR_MODEL:
+      # - 'base'   : ~140MB, ultra-fast, runs on any laptop CPU
+      # - 'small'  : ~460MB, higher accuracy for Indian English accents
+      # - 'medium' : ~1.5GB, near-perfect accuracy (needs 4GB+ RAM or GPU)
+      - ASR_MODEL=small
+      - ASR_ENGINE=faster_whisper
+    volumes:
+      # Persists downloaded HuggingFace/Whisper model weights locally so it only downloads once
+      - whisper_cache:/root/.cache/whisper
+
+volumes:
+  whisper_cache:
+    name: task_whisper_cache

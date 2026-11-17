@@ -1,0 +1,5 @@
+Mohammed Hifzan (Manager): Hi Zen, quick follow-up on today's sprint check-in. The release candidate build is looking solid overall, but we have one urgent item that needs your attention before we launch. Could you test the new push notification delivery on Android 14 and verify that background alerts trigger properly?
+
+Zen: Sure Hifzan, I can take that up immediately. I will test the push notification delivery on Android 14 and verify background alert triggers by 2026-11-20.
+
+Mohammed Hifzan (Manager): Perfect, that is the only deliverable we need locked in for this cycle. Thanks Zen!

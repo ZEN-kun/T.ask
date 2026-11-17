@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650" width="100%" height="100%">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#1E293B" />
+    </linearGradient>
+
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6" />
+      <stop offset="100%" stop-color="#1D4ED8" />
+    </linearGradient>
+
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B5CF6" />
+      <stop offset="100%" stop-color="#6D28D9" />
+    </linearGradient>
+
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06B6D4" />
+      <stop offset="100%" stop-color="#0891B2" />
+    </linearGradient>
+
+    <!-- Filters & Shadows -->
+    <filter id="cardShadow" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+
+    <!-- Arrow Marker -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#38BDF8" />
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#10B981" />
+    </marker>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1200" height="650" rx="16" fill="url(#bgGrad)" />
+
+  <!-- Grid overlay -->
+  <g opacity="0.04" stroke="#FFFFFF" stroke-width="1">
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" />
+    </pattern>
+    <rect width="1200" height="650" fill="url(#grid)" />
+  </g>
+
+  <!-- Title Header -->
+  <g transform="translate(60, 45)">
+    <text x="0" y="0" font-family="'Segoe UI', Roboto, Helvetica, sans-serif" font-size="28" font-weight="800" fill="#FFFFFF" letter-spacing="-0.5">T.ask — Core Processing Pipeline</text>
+    <text x="0" y="26" font-family="'Segoe UI', Roboto, Helvetica, sans-serif" font-size="14" font-weight="500" fill="#94A3B8" font-style="italic">"What are your task?" — Meeting to Action Workflow</text>
+  </g>
+
+  <!-- Top Flow: Steps 1 -> 2 -> 3 -->
+  <!-- Step 1: Input -->
+  <g transform="translate(60, 120)" filter="url(#cardShadow)">
+    <rect width="230" height="180" rx="12" fill="#1E293B" stroke="#334155" stroke-width="1.5" />
+    <rect width="230" height="6" rx="3" fill="url(#blueGrad)" />
+    <circle cx="35" cy="38" r="16" fill="url(#blueGrad)" />
+    <text x="35" y="44" font-family="'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+    <text x="65" y="44" font-family="'Segoe UI', sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">Meeting Input</text>
+    <text x="25" y="80" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="600" fill="#38BDF8">• Audio Recording</text>
+    <text x="25" y="102" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="600" fill="#38BDF8">• Raw Transcript</text>
+    <rect x="25" y="125" width="180" height="32" rx="6" fill="#0F172A" stroke="#3B82F6" stroke-width="1" />
+    <text x="115" y="146" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#93C5FD" text-anchor="middle">📱 Flutter Mobile App</text>
+  </g>
+
+  <!-- Connector 1 -> 2 -->
+  <path d="M 290 210 L 350 210" fill="none" stroke="#38BDF8" stroke-width="2.5" marker-end="url(#arrow)" />
+
+  <!-- Step 2: Speech-to-Text -->
+  <g transform="translate(360, 120)" filter="url(#cardShadow)">
+    <rect width="230" height="180" rx="12" fill="#1E293B" stroke="#334155" stroke-width="1.5" />
+    <rect width="230" height="6" rx="3" fill="url(#cyanGrad)" />
+    <circle cx="35" cy="38" r="16" fill="url(#cyanGrad)" />
+    <text x="35" y="44" font-family="'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+    <text x="65" y="44" font-family="'Segoe UI', sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">Transcription</text>
+    <text x="25" y="80" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="500" fill="#E2E8F0">• Speaker Diarization</text>
+    <text x="25" y="102" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="500" fill="#E2E8F0">• High-Accuracy STT</text>
+    <rect x="25" y="125" width="180" height="32" rx="6" fill="#0F172A" stroke="#06B6D4" stroke-width="1" />
+    <text x="115" y="146" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#67E8F9" text-anchor="middle">🎙️ AssemblyAI Service</text>
+  </g>
+
+  <!-- Connector 2 -> 3 -->
+  <path d="M 590 210 L 650 210" fill="none" stroke="#38BDF8" stroke-width="2.5" marker-end="url(#arrow)" />
+
+  <!-- Step 3: AI Understanding -->
+  <g transform="translate(660, 120)" filter="url(#cardShadow)">
+    <rect width="230" height="180" rx="12" fill="#1E293B" stroke="#334155" stroke-width="1.5" />
+    <rect width="230" height="6" rx="3" fill="url(#purpleGrad)" />
+    <circle cx="35" cy="38" r="16" fill="url(#purpleGrad)" />
+    <text x="35" y="44" font-family="'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+    <text x="65" y="44" font-family="'Segoe UI', sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">AI Understanding</text>
+    <text x="25" y="80" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="500" fill="#E2E8F0">• Meeting Summary</text>
+    <text x="25" y="102" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="500" fill="#E2E8F0">• Key Points &amp; Decisions</text>
+    <rect x="25" y="125" width="180" height="32" rx="6" fill="#0F172A" stroke="#8B5CF6" stroke-width="1" />
+    <text x="115" y="146" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#C4B5FD" text-anchor="middle">🧠 Google Gemini LLM</text>
+  </g>
+
+  <!-- Connector 3 -> 4 (Turning down to right) -->
+  <path d="M 890 210 L 960 210 L 960 440 L 900 440" fill="none" stroke="#38BDF8" stroke-width="2.5" marker-end="url(#arrow)" />
+
+  <!-- Bottom Flow: Steps 6 <- 5 <- 4 -->
+
+  <!-- Step 4: Extraction & Validation -->
+  <g transform="translate(660, 350)" filter="url(#cardShadow)">
+    <rect width="230" height="180" rx="12" fill="#1E293B" stroke="#334155" stroke-width="1.5" />
+    <rect width="230" height="6" rx="3" fill="url(#amberGrad)" />
+    <circle cx="35" cy="38" r="16" fill="url(#amberGrad)" />
+    <text x="35" y="44" font-family="'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+    <text x="65" y="44" font-family="'Segoe UI', sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">Task Extraction</text>
+    <text x="25" y="80" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="500" fill="#E2E8F0">• Assignee Identification</text>
+    <text x="25" y="102" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="500" fill="#E2E8F0">• Deadline &amp; Action Item</text>
+    <rect x="25" y="125" width="180" height="32" rx="6" fill="#0F172A" stroke="#F59E0B" stroke-width="1" />
+    <text x="115" y="146" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#FCD34D" text-anchor="middle">📋 Strict JSON Contract</text>
+  </g>
+
+  <!-- Connector 4 -> 5 -->
+  <path d="M 660 440 L 600 440" fill="none" stroke="#38BDF8" stroke-width="2.5" marker-end="url(#arrow)" />
+
+  <!-- Step 5: Database & Assignment -->
+  <g transform="translate(360, 350)" filter="url(#cardShadow)">
+    <rect width="230" height="180" rx="12" fill="#1E293B" stroke="#334155" stroke-width="1.5" />
+    <rect width="230" height="6" rx="3" fill="url(#blueGrad)" />
+    <circle cx="35" cy="38" r="16" fill="url(#blueGrad)" />
+    <text x="35" y="44" font-family="'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+    <text x="65" y="44" font-family="'Segoe UI', sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">Store &amp; Notify</text>
+    <text x="25" y="80" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="500" fill="#E2E8F0">• SQLite / PostgreSQL</text>
+    <text x="25" y="102" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="500" fill="#E2E8F0">• Direct WhatsApp Alert</text>
+    <rect x="25" y="125" width="180" height="32" rx="6" fill="#0F172A" stroke="#2563EB" stroke-width="1" />
+    <text x="115" y="146" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#93C5FD" text-anchor="middle">💬 WhatsApp Cloud API</text>
+  </g>
+
+  <!-- Connector 5 -> 6 -->
+  <path d="M 360 440 L 300 440" fill="none" stroke="#10B981" stroke-width="2.5" marker-end="url(#arrowGreen)" />
+
+  <!-- Step 6: Completion Feedback Loop -->
+  <g transform="translate(60, 350)" filter="url(#cardShadow)">
+    <rect width="230" height="180" rx="12" fill="#1E293B" stroke="#10B981" stroke-width="2" />
+    <rect width="230" height="6" rx="3" fill="url(#emeraldGrad)" />
+    <circle cx="35" cy="38" r="16" fill="url(#emeraldGrad)" />
+    <text x="35" y="44" font-family="'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">6</text>
+    <text x="65" y="44" font-family="'Segoe UI', sans-serif" font-size="16" font-weight="700" fill="#34D399">Task Closure</text>
+    <text x="25" y="80" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="600" fill="#A7F3D0">Reply: 'DONE &lt;id&gt;'</text>
+    <text x="25" y="102" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="500" fill="#E2E8F0">• Auto-Verified Status</text>
+    <rect x="25" y="125" width="180" height="32" rx="6" fill="#064E3B" stroke="#059669" stroke-width="1" />
+    <text x="115" y="146" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="700" fill="#6EE7B7" text-anchor="middle">✔ Status: COMPLETED</text>
+  </g>
+
+  <!-- Footer Info -->
+  <text x="600" y="605" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="500" fill="#64748B" text-anchor="middle">T.ask — End-to-End Automated Task Life Cycle</text>
+</svg>
