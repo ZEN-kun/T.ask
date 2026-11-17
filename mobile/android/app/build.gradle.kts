@@ -8,7 +8,7 @@ plugins {
 android {
     namespace = "com.task.app.task_mobile"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    // ndkVersion is omitted to prevent unnecessary NDK downloads on ARM architectures
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
