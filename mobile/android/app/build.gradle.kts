@@ -1,3 +1,6 @@
+import java.util.Properties
+import java.io.File
+
 plugins {
     id("com.android.application")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
@@ -9,7 +12,7 @@ android {
     namespace = "com.task.app.task_mobile"
     compileSdk = flutter.compileSdkVersion
     
-    val localProperties = java.util.Properties().apply {
+    val localProperties = Properties().apply {
         val localPropertiesFile = rootProject.file("local.properties")
         if (localPropertiesFile.exists()) {
             load(localPropertiesFile.inputStream())
