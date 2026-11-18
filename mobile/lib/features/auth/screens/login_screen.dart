@@ -17,6 +17,7 @@ class LoginScreen extends ConsumerStatefulWidget {
 class _LoginScreenState extends ConsumerState<LoginScreen> {
   bool _isRegister = false;
   String _selectedRole = 'employee'; // 'employee' or 'manager'
+  bool _rememberMe = true;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -44,6 +45,20 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   void initState() {
     super.initState();
+    // Load remember me & saved email
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        final storage = ref.read(storageServiceProvider);
+        setState(() {
+          _rememberMe = storage.getRememberMe();
+        });
+        final savedEmail = storage.getSavedEmail();
+        if (savedEmail != null && savedEmail.isNotEmpty && _emailController.text.isEmpty) {
+          _emailController.text = savedEmail;
+        }
+      }
+    });
+
     // Reset selected manager whenever the employee types/edits their organization
     _employeeOrgController.addListener(() {
       if (_selectedManager != null) {
@@ -80,6 +95,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     bool success = false;
 
     if (!_isRegister) {
+      // Save Remember Me preference
+      final storage = ref.read(storageServiceProvider);
+      await storage.setRememberMe(_rememberMe);
+      if (_rememberMe) {
+        await storage.setSavedEmail(_emailController.text.trim());
+      } else {
+        await storage.setSavedEmail('');
+      }
+
       // Sign In
       success = await authNotifier.signIn(
         _emailController.text.trim(),
@@ -524,6 +548,38 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         },
                       ),
                     const SizedBox(height: 14),
+                  ],
+
+                  if (!_isRegister) ...[
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 12),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            height: 22,
+                            width: 22,
+                            child: Checkbox(
+                              value: _rememberMe,
+                              activeColor: AppTheme.accentBlue(context),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                              onChanged: (val) => setState(() => _rememberMe = val ?? true),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          GestureDetector(
+                            onTap: () => setState(() => _rememberMe = !_rememberMe),
+                            child: Text(
+                              'Remember me',
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: AppTheme.textPrimary(context),
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
 
                   const SizedBox(height: 12),

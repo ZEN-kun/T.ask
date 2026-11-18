@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:task_mobile/app/theme.dart';
 import 'package:task_mobile/app/theme_provider.dart';
 import 'package:task_mobile/core/utils/file_picker_helper.dart';
@@ -49,29 +50,77 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   }
 
   Future<void> _pickAvatarPhoto() async {
-    try {
-      final picked = await pickAvatarImage();
-      if (picked != null) {
-        Uint8List imageBytes = picked.bytes;
-        try {
-          final codec = await ui.instantiateImageCodec(imageBytes, targetWidth: 256);
-          final frame = await codec.getNextFrame();
-          final byteData = await frame.image.toByteData(format: ui.ImageByteFormat.png);
-          if (byteData != null) {
-            imageBytes = byteData.buffer.asUint8List();
-          }
-        } catch (_) {}
+    final source = await showModalBottomSheet<ImageSource?>(
+      context: context,
+      backgroundColor: AppTheme.solidCardBg(context),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Change Profile Photo',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: AppTheme.textPrimary(context),
+                ),
+              ),
+              const SizedBox(height: 16),
+              ListTile(
+                leading: Icon(Icons.photo_library_outlined, color: AppTheme.accentBlue(context)),
+                title: Text('Choose from Gallery', style: TextStyle(color: AppTheme.textPrimary(context))),
+                onTap: () => Navigator.of(ctx).pop(ImageSource.gallery),
+              ),
+              ListTile(
+                leading: Icon(Icons.camera_alt_outlined, color: AppTheme.accentBlue(context)),
+                title: Text('Take a Photo', style: TextStyle(color: AppTheme.textPrimary(context))),
+                onTap: () => Navigator.of(ctx).pop(ImageSource.camera),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
 
-        final b64 = 'data:image/png;base64,${base64Encode(imageBytes)}';
+    if (source == null) return;
+
+    try {
+      final picker = ImagePicker();
+      final picked = await picker.pickImage(
+        source: source,
+        maxWidth: 512,
+        maxHeight: 512,
+        imageQuality: 85,
+      );
+
+      if (picked != null) {
+        final bytes = await picked.readAsBytes();
+        final b64 = 'data:image/jpeg;base64,${base64Encode(bytes)}';
         setState(() {
           _photoBase64 = b64;
         });
       }
     } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to pick photo: $e')),
-        );
+      // Fallback to generic file picker if camera/gallery plugin is unavailable
+      try {
+        final pickedFile = await pickAvatarImage();
+        if (pickedFile != null) {
+          final b64 = 'data:image/jpeg;base64,${base64Encode(pickedFile.bytes)}';
+          setState(() {
+            _photoBase64 = b64;
+          });
+        }
+      } catch (err) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Failed to pick photo: $err')),
+          );
+        }
       }
     }
   }

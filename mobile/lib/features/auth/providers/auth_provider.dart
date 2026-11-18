@@ -100,8 +100,23 @@ class AuthState {
 class AuthNotifier extends StateNotifier<AuthState> {
   final FirebaseAuth _auth;
   final FirebaseFirestore _firestore;
+  final StorageService _storageService;
 
-  AuthNotifier(this._auth, this._firestore) : super(AuthState(isLoading: true)) {
+  AuthNotifier(this._auth, this._firestore, this._storageService) : super(AuthState(isLoading: true)) {
+    _initAuth();
+  }
+
+  Future<void> _initAuth() async {
+    final cachedUserJson = _storageService.getUser();
+    final rememberMe = _storageService.getRememberMe();
+
+    if (cachedUserJson != null && rememberMe && _auth.currentUser != null) {
+      try {
+        final cachedUser = AppUser.fromMap(cachedUserJson, cachedUserJson['uid'] ?? _auth.currentUser!.uid);
+        state = state.copyWith(user: cachedUser, isAuthenticated: true, isLoading: false);
+      } catch (_) {}
+    }
+
     _listenToAuthChanges();
   }
 
@@ -120,12 +135,17 @@ class AuthNotifier extends StateNotifier<AuthState> {
       final doc = await _firestore.collection('users').doc(uid).get();
       if (doc.exists && doc.data() != null) {
         final appUser = AppUser.fromMap(doc.data()!, uid);
+        await _storageService.saveUser(appUser.toMap());
         state = state.copyWith(user: appUser, isAuthenticated: true, isLoading: false);
       } else {
         state = state.copyWith(isAuthenticated: true, isLoading: false);
       }
     } catch (e) {
-      state = state.copyWith(isLoading: false, errorMessage: e.toString());
+      if (_auth.currentUser != null) {
+        state = state.copyWith(isAuthenticated: true, isLoading: false);
+      } else {
+        state = state.copyWith(isLoading: false, errorMessage: e.toString());
+      }
     }
   }
 
@@ -273,6 +293,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
   // Sign Out / Logout
   Future<void> logout() async {
     await _auth.signOut();
+    await _storageService.clearAuth();
     state = AuthState(isAuthenticated: false);
   }
 
@@ -282,5 +303,6 @@ class AuthNotifier extends StateNotifier<AuthState> {
 final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
   final auth = ref.watch(firebaseAuthProvider);
   final firestore = ref.watch(firestoreProvider);
-  return AuthNotifier(auth, firestore);
+  final storage = ref.watch(storageServiceProvider);
+  return AuthNotifier(auth, firestore, storage);
 });

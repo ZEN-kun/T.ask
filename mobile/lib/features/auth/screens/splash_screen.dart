@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -79,7 +80,11 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
     Future.delayed(const Duration(seconds: 4), () {
       if (!mounted) return;
       final auth = ref.read(authProvider);
-      if (auth.isAuthenticated) {
+      final storage = ref.read(storageServiceProvider);
+      final rememberMe = storage.getRememberMe();
+      final hasFirebaseUser = FirebaseAuth.instance.currentUser != null;
+
+      if ((auth.isAuthenticated || hasFirebaseUser) && rememberMe) {
         context.go('/dashboard');
       } else {
         context.go('/login');

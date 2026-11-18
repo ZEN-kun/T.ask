@@ -13,4 +13,6 @@ class AppConstants {
   // Storage keys
   static const String tokenKey = 'task_access_token';
   static const String userKey = 'task_user_info';
+  static const String rememberMeKey = 'task_remember_me';
+  static const String savedEmailKey = 'task_saved_email';
 }

@@ -33,4 +33,20 @@ class StorageService {
     await _prefs.remove(AppConstants.tokenKey);
     await _prefs.remove(AppConstants.userKey);
   }
+
+  Future<void> setRememberMe(bool value) async {
+    await _prefs.setBool(AppConstants.rememberMeKey, value);
+  }
+
+  bool getRememberMe() {
+    return _prefs.getBool(AppConstants.rememberMeKey) ?? true;
+  }
+
+  Future<void> setSavedEmail(String email) async {
+    await _prefs.setString(AppConstants.savedEmailKey, email);
+  }
+
+  String? getSavedEmail() {
+    return _prefs.getString(AppConstants.savedEmailKey);
+  }
 }

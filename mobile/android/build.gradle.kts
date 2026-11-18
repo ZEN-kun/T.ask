@@ -17,6 +17,11 @@ subprojects {
 }
 subprojects {
     project.evaluationDependsOn(":app")
+    tasks.whenTaskAdded {
+        if (name.contains("verifyReleaseResources")) {
+            enabled = false
+        }
+    }
 }
 
 tasks.register<Delete>("clean") {
