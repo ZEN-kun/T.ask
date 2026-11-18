@@ -305,7 +305,7 @@ class MeetingsScreen extends ConsumerWidget {
                   return RefreshIndicator(
                     onRefresh: () async => ref.invalidate(meetingsListProvider),
                     child: ListView.separated(
-                      padding: const EdgeInsets.fromLTRB(20, 4, 20, 100),
+                      padding: const EdgeInsets.fromLTRB(20, 4, 20, 140),
                       itemCount: filtered.length,
                       separatorBuilder: (_, _) => const SizedBox(height: 12),
                       itemBuilder: (context, index) {

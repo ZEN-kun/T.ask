@@ -68,7 +68,7 @@ class DashboardScreen extends ConsumerWidget {
                 .toList();
 
             return SingleChildScrollView(
-              padding: const EdgeInsets.fromLTRB(20, 16, 20, 100),
+              padding: const EdgeInsets.fromLTRB(20, 16, 20, 140),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -334,18 +334,18 @@ Widget _buildMetricCard({
 }) {
   return Expanded(
     child: Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
       decoration: BoxDecoration(
         color: AppTheme.cardBg(context),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(18),
         border: Border.all(color: AppTheme.cardBorder(context), width: 1.1),
         boxShadow: [
           BoxShadow(
             color: AppTheme.isDark(context)
-                ? Colors.black.withValues(alpha: 0.25)
+                ? Colors.black.withValues(alpha: 0.22)
                 : const Color(0xFF3E679B).withValues(alpha: 0.05),
-            blurRadius: 16,
-            offset: const Offset(0, 5),
+            blurRadius: 14,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -363,14 +363,14 @@ Widget _buildMetricCard({
                   shape: BoxShape.circle,
                 ),
               ),
-              Icon(icon, size: 18, color: AppTheme.textSecondary(context).withValues(alpha: 0.6)),
+              Icon(icon, size: 17, color: AppTheme.textSecondary(context).withValues(alpha: 0.6)),
             ],
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 10),
           Text(
             value,
             style: TextStyle(
-              fontSize: 26,
+              fontSize: 24,
               fontWeight: FontWeight.w800,
               color: indicatorColor == AppTheme.statusOverdueTextColor(context)
                   ? indicatorColor
